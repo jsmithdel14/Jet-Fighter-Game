@@ -132,13 +132,13 @@ namespace Unit05.Game.Casting
             this.position = position;
         }
 
-        public void SetApprox(Point position)
+        public void SetApprox(Point approx)
         {
             if (approx == null)
             {
                 throw new ArgumentException("position can't be null");
             }
-            this.approx = position;
+            this.approx = approx;
         }
         /// <summary>
         /// Sets the actor's text to the given value.

@@ -81,7 +81,7 @@ namespace Unit05.Game.Casting
                     
                     Actor bullet = new Actor();
                     bullet.SetPosition(startingPos);
-                    bullet.SetApprox(position.Add(position));
+                    bullet.SetApprox(startingPos.Add(startingPos));
                     bullet.SetVelocity(offset);
                     bullet.SetText("f");
                     bullet.SetColor(Constants.YELLOW);

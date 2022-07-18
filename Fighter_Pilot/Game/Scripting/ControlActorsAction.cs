@@ -182,13 +182,13 @@ namespace Unit05.Game.Scripting
             // shoot
             if (keyboardService.IsKeyDown("shift"))
             {
-                direction = new Point(dx,dy);
+                // direction = new Point(dx,dy);
                 snake.Shoot(1, direction);
                 
             }
             if (keyboardService.IsKeyDown("space"))
             {
-                direction2 = new Point(dx2,dy2);
+                // direction2 = new Point(dx2,dy2);
                 snake2.Shoot(1, direction2);
                 
             }

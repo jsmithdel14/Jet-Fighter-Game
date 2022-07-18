@@ -151,7 +151,7 @@ namespace Unit05.Game.Scripting
             {
                     foreach(Actor part in body)
                     {
-                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetPosition().Add(bullet.GetPosition())))
                         {
                             food.LosePoints();
                             int points = food.GetPoints();
@@ -169,7 +169,7 @@ namespace Unit05.Game.Scripting
                 
                     foreach(Actor part in body2)
                     {
-                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetPosition().Add(bullet.GetPosition())))
                         {
                             food.LosePoints();
                             int points = food.GetPoints();
@@ -188,7 +188,7 @@ namespace Unit05.Game.Scripting
             {
                     foreach(Actor part in body)
                     {
-                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetPosition().Add(bullet.GetPosition())))
                         {
                             food.LosePoints();
                             int points = food.GetPoints();
@@ -206,7 +206,7 @@ namespace Unit05.Game.Scripting
                 
                     foreach(Actor part in body2)
                     {
-                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetPosition().Add(bullet.GetPosition())))
                         {
                             food.LosePoints();
                             int points = food.GetPoints();
