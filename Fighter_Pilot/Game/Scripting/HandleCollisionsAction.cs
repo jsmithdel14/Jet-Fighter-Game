@@ -30,8 +30,8 @@ namespace Unit05.Game.Scripting
         {
             if (isGameOver == false)
             {
-                HandleHeadCollisions(cast);
-                //HandleBodyCollisions(cast);
+                // HandleHeadCollisions(cast);
+                HandleBodyCollisions(cast);
                 HandleGameOver(cast);
             }
         }
@@ -48,6 +48,7 @@ namespace Unit05.Game.Scripting
             List<Actor> bullets2 = snake2.GetBullets();
             Food food = (Food)cast.GetFirstActor("food");
             List<Actor> temp = new List<Actor>();
+            List<Actor> temp2 = new List<Actor>();
             foreach (Actor bullet in bullets){
                 
                 if (head.GetPosition().Equals(bullet.GetPosition()))
@@ -56,7 +57,7 @@ namespace Unit05.Game.Scripting
                     food.LosePoints();
                     int points = food.GetPoints();
                     score.AddPoints(points);
-                    
+                    // temp.Add(bullet);
                     if (score.returnLives() == 0)
                     {
                         isGameOver = true;
@@ -72,7 +73,7 @@ namespace Unit05.Game.Scripting
                     food.LosePoints();
                     int points = food.GetPoints();
                     score2.AddPoints(points);
-                    hit = true;
+                    // temp.Add(bullet);
                     if (score2.returnLives() == 0){
                         isGameOver = true;
                     }
@@ -82,7 +83,12 @@ namespace Unit05.Game.Scripting
                 }
                 
             }
-            
+            // int list_count = temp.Count; 
+            // for (int i=1; i<=list_count; i++)
+			// {
+            //     bullets.Remove(bullets[i]);
+				
+			// }
             // if (hit == true)
             // {
             //     bullets.Remove(bullets[index]);
@@ -94,7 +100,7 @@ namespace Unit05.Game.Scripting
                     food.LosePoints();
                     int points = food.GetPoints();
                     score2.AddPoints(points);
-                    hit2 = true;
+                    // temp2.Add(bullet);
                     if (score2.returnLives() == 0){
                         isGameOver = true;
                     }
@@ -109,66 +115,112 @@ namespace Unit05.Game.Scripting
                     food.LosePoints();
                     int points = food.GetPoints();
                     score.AddPoints(points);
-                    hit2 = true;
+                    // temp2.Add(bullet);
                     if (score.returnLives() == 0){
                         isGameOver = true;
                     }
                 
                 }
             }
-            // if (hit2 == true)
-            // {
-            //     bullets2.Remove(bullets[index]);
+            // int list_count2 = temp2.Count; 
+            // for (int i=1; i<=list_count; i++)
+			// {
+            //     bullets2.Remove(bullets2[i]);
             // }
+				
         }
 
         /// <summary>
         /// Sets the game over flag if the snake collides with one of its segments.
         /// </summary>
         /// <param name="cast">The cast of actors.</param>
-        // private void HandleBodyCollisions(Cast cast)
-        // {
-        //     Snake snake = (Snake)cast.GetFirstActor("snake");
-        //     Snake snake2 = (Snake)cast.GetFirstActor("snake2");
-        //     List<Actor> body = snake.GetBody();
-        //     List<Actor> body2 = snake2.GetBody();
-        //     Score score = (Score)cast.GetFirstActor("score");
-        //     Score score2 = (Score)cast.GetFirstActor("score2");
-        //     List<Actor> bullets = snake.GetBullets();
-        //     List<Actor> bullets2 = snake2.GetBullets();
-        //     Food food = (Food)cast.GetFirstActor("food");
-        //     foreach (Actor segment in body)
-        //     {
+        private void HandleBodyCollisions(Cast cast)
+        {
+            Snake snake = (Snake)cast.GetFirstActor("snake");
+            Snake snake2 = (Snake)cast.GetFirstActor("snake2");
+            List<Actor> body = snake.GetBody();
+            List<Actor> body2 = snake2.GetBody();
+            Score score = (Score)cast.GetFirstActor("score");
+            Score score2 = (Score)cast.GetFirstActor("score2");
+            List<Actor> bullets = snake.GetBullets();
+            List<Actor> bullets2 = snake2.GetBullets();
+            Food food = (Food)cast.GetFirstActor("food");
+            List<Actor> temp = new List<Actor>();
+            
+            foreach (Actor bullet in bullets)
+            {
+                    foreach(Actor part in body)
+                    {
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        {
+                            food.LosePoints();
+                            int points = food.GetPoints();
+                            score.AddPoints(points);
+                            temp.Add(bullet);
+                            
+                            if (score.returnLives() == 0)
+                            {
+                                isGameOver = true;
+                            }
+                        }
+                    }
+                    
+            
                 
-        //         foreach (Actor bullet in bullets)
-        //         {
-        //             if (segment.GetPosition().Equals(bullet.GetPosition()))
-        //             {
-        //                 food.LosePoints();
-        //                 int points = food.GetPoints();
-        //                 score.AddPoints(points);
-        //                 //snake.RemoveBullet(bullet);
-        //                 if (score.returnLives() == 0)
-        //                 {
-        //                     isGameOver = true;
-        //                 }
-        //             }
-        //         }
-        //         foreach (Actor bullet in bullets2)
-        //         {
-        //             if (segment.GetPosition().Equals(bullet.GetPosition()))
-        //             {
-        //                 food.LosePoints();
-        //                 int points = food.GetPoints();
-        //                 score.AddPoints(points);
-        //                 //snake.RemoveBullet(bullet);
-        //                 if (score.returnLives() == 0)
-        //                 {
-        //                     isGameOver = true;
-        //                 }
-        //             }
-        //         }
-        //     }
+                    foreach(Actor part in body2)
+                    {
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        {
+                            food.LosePoints();
+                            int points = food.GetPoints();
+                            score2.AddPoints(points);
+                            temp.Add(bullet);
+                            if (score2.returnLives() == 0)
+                            {
+                                isGameOver = true;
+                            }
+                        }
+                    }
+            }
+            bullets.RemoveAll(x => temp.Contains(x));
+
+            foreach (Actor bullet in bullets2)
+            {
+                    foreach(Actor part in body)
+                    {
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        {
+                            food.LosePoints();
+                            int points = food.GetPoints();
+                            score.AddPoints(points);
+                            temp.Add(bullet);
+                            
+                            if (score.returnLives() == 0)
+                            {
+                                isGameOver = true;
+                            }
+                        }
+                    }
+                    
+            
+                
+                    foreach(Actor part in body2)
+                    {
+                        if (part.GetPosition().Equals(bullet.GetPosition()) || part.GetPosition().Equals(bullet.GetApprox()))
+                        {
+                            food.LosePoints();
+                            int points = food.GetPoints();
+                            score2.AddPoints(points);
+                            temp.Add(bullet);
+                            if (score2.returnLives() == 0)
+                            {
+                                isGameOver = true;
+                            }
+                        }
+                    }
+            }
+            bullets2.RemoveAll(x => temp.Contains(x));
+        }    
         //     foreach (Actor segment in body2)
         //     {
         //         foreach (Actor bullet in bullets)
@@ -209,7 +261,8 @@ namespace Unit05.Game.Scripting
                 Snake snake2 = (Snake)cast.GetFirstActor("snake2");
                 List<Actor> segments2 = snake2.GetSegments();
                 Food food = (Food)cast.GetFirstActor("food");
-
+                List<Actor> bullets = snake.GetBullets();
+                List<Actor> bullets2 = snake2.GetBullets();
                 // create a "game over" message
                 int x = Constants.MAX_X / 2;
                 int y = Constants.MAX_Y / 2;
@@ -229,6 +282,14 @@ namespace Unit05.Game.Scripting
                 foreach (Actor segment in segments2)
                 {
                     segment.SetColor(Constants.WHITE);
+                }
+                foreach (Actor bullet in bullets)
+                {
+                    bullet.SetColor(Constants.WHITE);
+                }
+                foreach (Actor bullet in bullets2)
+                {
+                    bullet.SetColor(Constants.WHITE);
                 }
                 food.SetColor(Constants.WHITE);
                 snake.getWin(isGameOver);

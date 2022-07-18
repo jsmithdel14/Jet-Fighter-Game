@@ -19,6 +19,7 @@ namespace Unit05.Game.Scripting
         int dy2 = 0;
         private Point direction = new Point(0, -Constants.CELL_SIZE);
         private Point direction2 = new Point(0, -Constants.CELL_SIZE);
+        // private Point direction2 = new Point(0, 0);
 
         /// <summary>
         /// Constructs a new instance of ControlActorsAction using the given KeyboardService.

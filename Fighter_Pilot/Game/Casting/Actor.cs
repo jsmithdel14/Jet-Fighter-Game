@@ -16,6 +16,7 @@ namespace Unit05.Game.Casting
         private int fontSize = 15;
         private Color color = Constants.WHITE;
         private Point position = new Point(0, 0);
+        private Point approx = new Point(0, 0);
         private Point velocity = new Point(0, 0);
 
         /// <summary>
@@ -50,6 +51,11 @@ namespace Unit05.Game.Casting
         public Point GetPosition()
         {
             return position;
+        }
+
+        public Point GetApprox()
+        {
+            return approx;
         }
 
         /// <summary>
@@ -126,6 +132,14 @@ namespace Unit05.Game.Casting
             this.position = position;
         }
 
+        public void SetApprox(Point position)
+        {
+            if (approx == null)
+            {
+                throw new ArgumentException("position can't be null");
+            }
+            this.approx = position;
+        }
         /// <summary>
         /// Sets the actor's text to the given value.
         /// </summary>

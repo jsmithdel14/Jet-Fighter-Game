@@ -74,38 +74,29 @@ namespace Unit05.Game.Casting
                     Actor head = segments.First<Actor>();
                     Point velocity = head.GetVelocity();
                     Point position = head.GetPosition() ;
-                    Point offset = new Point(2*Constants.CELL_SIZE,2*Constants.CELL_SIZE);
+                    Point offset = velocity.Add(velocity);
                     Point startingPos = position.Add(velocity);
+                    Point approxPos = startingPos.Add(offset);
                     //Point newVelo = dir.Add(velocity);
                     
                     Actor bullet = new Actor();
                     bullet.SetPosition(startingPos);
-                    bullet.SetVelocity(velocity.Add(velocity));
+                    bullet.SetApprox(position.Add(position));
+                    bullet.SetVelocity(offset);
                     bullet.SetText("f");
                     bullet.SetColor(Constants.YELLOW);
                     
-                    if (bullets.Count > 5)
+                    if (bullets.Count > 0)
                     {
                         bullets.Remove(bullets[0]);
                     }
-                    bullets.Add(bullet);
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    bullets.Add(bullet);    
                 }
                 
             }
          }
          public void RemoveBullet(int index)
          {
-            
-            
             bullets.Remove(bullets[index]);
          }
         public void GrowTail(int numberOfSegments)
@@ -176,7 +167,7 @@ namespace Unit05.Game.Casting
                 //Point position = new Point(x - i * Constants.CELL_SIZE, y);
                 Point velocity = new Point(1 * Constants.CELL_SIZE, 0);
                 //Point velocity = new Point(1 * Constants.CELL_SIZE, 0);
-                string text = i == 0 ? "8" : "#";
+                string text = i == 0 ? "8" : "8";
                 if (colors == "red"){
                     Color color = i == 0 ? Constants.RED : Constants.RED;
                     snakeColor = color;
